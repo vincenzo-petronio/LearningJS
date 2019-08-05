@@ -1,0 +1,19 @@
+<div>
+    <h2>Scope & this</h2>
+    <ul>
+        <li>this da un metodo in un oggetto: {{ getLabelFromData() }}</li>
+        <li>this in un costruttore {{ getDataObj(200, 'second item') }}</li>
+        <li>this in una funzione callback definita inline <button onclick="checkScope()">CHECK1</button></li>
+        <li>this in una funzione callback definita con javascript <button name="btn">CHECK2</button></li>
+    </ul>
+</div>
+<script type="application/javascript">
+
+    // CALLBACK
+    function checkScope() {
+        alert('callback su oggetto ' + (this.tagName === undefined ? 'window' : this.tagName));
+    }
+    window.onload = function () {
+        document.getElementsByName("btn")[0].onclick = checkScope;
+    }
+</script>
