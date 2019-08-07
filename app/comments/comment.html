@@ -1,6 +1,10 @@
 <div>
-    <h2>{{ title }}</h2>
-    <ul ng-repeat="post in comments">
+    <h2>{{ title }} - AJAX</h2>
+    <ul ng-repeat="post in comments | limitTo:'20'">
         <li>{{ post.postId }} - {{ post.name }}</li>
+        <!-- <p><a href="#/comments/{{ post.id }}">click</a></p> -->
     </ul>
+
+    <h2>{{ title }} - RESTful</h2>
+    <p>{{ comment }}</p>
 </div>

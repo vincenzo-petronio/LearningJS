@@ -2,7 +2,8 @@
 
 angular
     .module('learningjsApp', [
-        'ngRoute'
+        'ngRoute',
+        'ngResource'
     ])
     .config(routeConfig);
 
@@ -14,6 +15,10 @@ function routeConfig($routeProvider) {
             templateUrl: '../comments/comment.html',
             controller: 'CommentCtrl'
         })
+        // .when('/comments/:id', {
+        //     templateUrl: '../comments/comment.html',
+        //     controller: 'CommentCtrl'
+        // })
         .when('/users', {
             templateUrl: '../users/users.html',
             controller: 'UsersCtrl as vm'

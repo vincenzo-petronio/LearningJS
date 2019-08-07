@@ -42,7 +42,7 @@
       <p id="idDateNow"></p>
 
       <div ng-controller="BaseCtrl">
-        <h2> #### AngularJS section #### {{ getAppVersion() }}</h2>
+        <h2> v{{ getAppVersion() }}</h2>
 
         <p><b>$watch</b></p><input type="number" placeholder="Enter a number..." ng-model="magicNumber">
         <p>{{ magicNumberResult }}</p>
@@ -50,6 +50,15 @@
 
     </div>
 
+    <div>
+      <ul>
+        <li><a ng-href="#!">Home</a></li>
+        <li><a ng-href="#!users">users</a></li>
+        <li><a ng-href="#!comments">comments</a></li>
+        <li><a ng-href="#!scope">scope & this</a></li>
+      </ul>
+    </div>
+    
     <div ng-view></div>
 
 
@@ -64,6 +73,7 @@
   <!-- build:js scripts/main.js -->
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular-route.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular-resource.min.js"></script>
   <script src="scripts/main.js"></script>
   <script src="scripts/app.module.js"></script>
   <script src="scripts/index.controller.js"></script>
