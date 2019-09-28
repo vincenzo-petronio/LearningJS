@@ -9,13 +9,15 @@ console.log('\'Allo \'Allo!');
 // $(function () { $('[data-toggle="popover"]').popover(); });
 
 
+// Constructor Pattern
 var DataNow = function () {
-    this.value = new Date();
+    this.fulldate = new Date();
     this.Now = function () {
-        return this.value;
+        return this.fulldate;
     };
 };
 
+// Named function expression (è un modo meno noto per definire una funzione)
 // var DataNow = function DataOra() {
 //     this.value = new Date();
 //     this.Now = function () {

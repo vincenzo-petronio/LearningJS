@@ -1,0 +1,139 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+</head>
+
+<body>
+    <h4>Create Person</h4>
+    <br>
+    <p>
+        <label><b>Name</b></label>
+        <input type="text" id="id_name" name="name">
+    </p>
+    <p>
+        <label><b>Surname</b></label>
+        <input type="text" id="id_surname" name="surname">
+    </p>
+    <p>
+        <label><b>Age</b></label>
+        <input type="number" id="id_age" name="age">
+    </p>
+    <p>
+        <button
+            onclick="CreatePerson(document.getElementById('id_name').value, document.getElementById('id_surname').value, document.getElementById('id_age').value)">
+            Create
+        </button>
+    </p>
+    <h3 id="newperson"></h3>
+    <p id="newpersonproto"></p>
+    <!-- <script src="../scripts/main.js"></script> -->
+
+    <script>
+        // Per aggiungere membri ad un oggetto ci sono due modi:
+        // 1) Nel costruttore, inizializzando le variabili.
+        // 2) Nel prototype, per aggiungere metodi pubblici
+
+        // Costruttore Person
+        function Person(name, surname, age) {
+            // Tutti i membri (variabili) di un oggetto sono pubblici.
+            // Qualsiasi funzione può accedere, modificare, eliminare, aggiungere.
+            this.name = name;
+            this.surname = surname;
+            this.age = age;
+
+            // Membri privati, accessibili solo da metodi privati (cioè inner function).
+            // Non è possibile chiamarli da un metodo pubblico.
+            var secretPin = 123456789;
+            var privateParameter = name + ' ' + surname;
+            function isSecret() {
+                // closure: una inner function ha sempre accesso a var e parameters
+                // al suo esterno!
+                return secretPin == 12345 || privateParameter == name;
+            };
+
+
+            // Un metodo 'privileged' permette l'accesso a metodi privati che possono 
+            // accedere a variabili private, e a sua volta è accessible da metodi
+            // pubblici.
+            this.getPrivilegedAccess = function () {
+                // return isSecret();
+                return privateParameter + '[' + secretPin + ']';
+            };
+        };
+
+        
+        // Il prototype è generalmente utilizzato per aggiungere metodi pubblici.
+        // Tali metodi vengono "ereditati" da tutte le istanze dell'oggetto.
+        // Quando viene invocato un membro che non è presente in un oggetto,
+        // viene ricercato nel prototype dell'oggetto costruttore (prototype chain).
+
+        // E' possibile creare metodi privati anche nel prototype.
+        // Self-Invoking Anonymous Function expression (module pattern)
+        Person.prototype = (function () {
+            // Questo scope privato viene creato una sola volta,
+            // tutte le istanze dell'oggetto ereditano le stesse public functions.
+
+
+            // private scope
+            var initId = 1000;
+            var getSecretMember = function () {
+                return 'prototype: ' + this.secretPin;
+            };
+
+            // private
+            // N.B. la sintassi completa è:
+            // var getId = function() { ... };
+            function getId() {
+                // ha accesso ai membri privati
+                return initId + '_' + Math.random();
+            };
+
+            // definisco il prototype
+            return {
+                // constructor
+                constructor: Person,
+
+                // public functions: sono metodi di accesso
+                getPrivateId: function () {
+                    // è una chiamata al metodo privato, ma ha anche accesso ai membri
+                    // pubblici dell'oggetto.
+                    return this.age + ' - ' + getId();
+                    // return getId.call(this);
+                },
+                getPrivateSecretMember: function () {
+                    // Accede al metodo privato, che a sua volta non ha accesso
+                    // al membro privato dell'oggetto.
+                    return getSecretMember();
+                },
+            };
+        })();
+
+
+        var CreatePerson = function (n, s, a) {
+            var p1 = new Person(n, s, a);
+            document.getElementById('newperson').innerHTML = "p1:"
+                + p1.getPrivilegedAccess()
+                + " - "
+                + p1.getPrivateId()
+                + " - "
+                + p1.getPrivateSecretMember();
+
+            var p2 = new Person(n, s, a);
+            document.getElementById('newperson').innerHTML += "<br>"
+                + "p2:"
+                + p2.getPrivilegedAccess()
+                + " - "
+                + p2.getPrivateId()
+                + " - "
+                + p2.getPrivateSecretMember();
+        };
+    </script>
+</body>
+
+<footer>
+
+</footer>
+
+</html>
