@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 console.log('\'Allo \'Allo!');
 
 // Uncomment to enable Bootstrap tooltips
@@ -34,3 +36,5 @@ var DataNow = function () {
 //         };
 //     }
 // }
+
+/* eslint-enable */

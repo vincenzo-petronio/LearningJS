@@ -3,7 +3,7 @@
 angular
     .module('learningjsApp', [
         'ngRoute',
-        'ngResource'
+        'ngResource',
     ])
     .config(routeConfig);
 
@@ -13,7 +13,7 @@ function routeConfig($routeProvider) {
     $routeProvider
         .when('/comments', {
             templateUrl: '../comments/comment.html',
-            controller: 'CommentCtrl'
+            controller: 'CommentCtrl',
         })
         // .when('/comments/:id', {
         //     templateUrl: '../comments/comment.html',
@@ -21,14 +21,14 @@ function routeConfig($routeProvider) {
         // })
         .when('/users', {
             templateUrl: '../users/users.html',
-            controller: 'UsersCtrl as vm'
+            controller: 'UsersCtrl as vm',
         })
         .when('/scope', {
             templateUrl: '../scope/scope.html',
-            controller: 'ScopeCtrl'
+            controller: 'ScopeCtrl',
         })
         .otherwise({
-            redirectTo: '/'
+            redirectTo: '/',
         })
         ;
 }
