@@ -8,6 +8,7 @@
 <body>
     <button id="XMLHttpRequest" name="XMLHttpRequest" onclick="tryNative()">XMLHttpRequest</button>
     <button id="XMLHttpRequest2" name="XMLHttpRequest2" onclick="tryPromise()">XMLHttpRequest with Promise</button>
+    <button id="AsyncPromise" name="AsyncPromise" onclick="tryAsync()">Async/Await with Promise</button>
 
     <hr>
     <p id="id_response" name="response"></p>
@@ -47,9 +48,14 @@
         log('T4');
     }
 
-    // Observer Pattern: in attesa del click
+    // Observer Pattern: in attesa del click. 
+    // addEventListener è in attesa dell'evento click, quando lo rileva invoca
+    // la function specificata come parametro: questa è la callback!
+    // A callback is a function that is passed into another function as an 
+    // argument to be executed later.
     let text = document.querySelector('p');
     text.addEventListener('click', function (e) {
+        // inside callback!
         log('T6');
     });
 
@@ -98,9 +104,30 @@
             function (error) {
                 log('T12' + ' ' + error);
             }
-        ).then(function(data) { // I then possono formare una chain
+        ).then(function (data) { // I then possono formare una chain
             log('T11-b' + ' ' + data);
         });
+    }
+
+
+
+    async function tryAsync() {
+        log('');
+
+        // - Functions with the async keyword will always return a promise.
+        // - Async function cannot wait for multiple promises at the same time.
+        // - Await can only be used inside an async function.
+        let promise = new Promise((resolve, reject) => {
+            log('T22');
+            setTimeout(() => {
+                log('T23');
+                resolve('promise fulfilled!');
+            }, 2000);
+        });
+
+        log('T20');
+        let result = await promise;
+        log('T21' + ' ' + result);
     }
 </script>
 
