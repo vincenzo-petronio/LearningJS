@@ -1,0 +1,107 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+</head>
+
+<body>
+    <button id="XMLHttpRequest" name="XMLHttpRequest" onclick="tryNative()">XMLHttpRequest</button>
+    <button id="XMLHttpRequest2" name="XMLHttpRequest2" onclick="tryPromise()">XMLHttpRequest with Promise</button>
+
+    <hr>
+    <p id="id_response" name="response"></p>
+</body>
+
+<footer>
+
+</footer>
+
+<script>
+    function log(msg) {
+        document.getElementById('id_response').innerHTML += "<br />" + msg;
+    }
+
+
+    // Sync con eccezioni: listener
+    function tryNative() {
+        log('');
+
+        // In JS il codice è single-thread e sincrono,
+        // ma esistono eccezioni: XMLHttpRequest e Event Listener sul DOM.
+        // In entrambi i casi "osserviamo" l'evento, ma non creiamo un 
+        // async Task ad-hoc.
+        let odlXhr = new XMLHttpRequest();
+
+        log('T1');
+        odlXhr.open('GET', 'https://jsonplaceholder.typicode.com/todos/10', true);
+        odlXhr.onload = function () {
+            // Observer Pattern: il codice continua nel main-thread,
+            // quando il server risponde un Task esegue questo metodo.
+            log('T2' + ' ' + odlXhr.response);
+        };
+
+        log('T3');
+        odlXhr.send();
+
+        log('T4');
+    }
+
+    // Observer Pattern: in attesa del click
+    let text = document.querySelector('p');
+    text.addEventListener('click', function (e) {
+        log('T6');
+    });
+
+    // Built-in async: Promises
+    // Con i promises è stato introdotto un JS un metodo simile a quanto
+    // già esistente in altri linguaggi, così da poter scrivere nativamente
+    // codice async e rimuovere il codice basato sull'approccio a callback.
+    // Le promise sono il mezzo per abilitare l'utilizzo di async/await nel 
+    // codice.
+    function getPromise() {
+        return new Promise(function (resolve, reject) {
+            let odlXhr = new XMLHttpRequest();
+
+            log('T13');
+            odlXhr.open('GET', 'https://jsonplaceholder.typicode.com/todos/10', true);
+
+            odlXhr.onload = function () {
+                log('T14');
+                if (odlXhr.status == 200) // OK 
+                {
+                    resolve(odlXhr.response);
+                } else {
+                    reject(Error(odlXhr.statusText));
+                }
+            };
+            odlXhr.onerror = function () {
+                reject(Error('Network Error'));
+            };
+
+            log('T15');
+            odlXhr.send();
+
+            log('T16');
+        });
+    }
+
+    function tryPromise() {
+        log('');
+        log('T10');
+        getPromise().then(
+            function (result) {
+                log('T11' + ' ' + result);
+                var jsonObj = JSON.parse(result);
+                return jsonObj.title;
+            },
+            function (error) {
+                log('T12' + ' ' + error);
+            }
+        ).then(function(data) { // I then possono formare una chain
+            log('T11-b' + ' ' + data);
+        });
+    }
+</script>
+
+</html>
