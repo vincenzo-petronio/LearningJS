@@ -27,6 +27,14 @@ function routeConfig($routeProvider) {
             templateUrl: '../scope/scope.html',
             controller: 'ScopeCtrl',
         })
+        .when('/watch', {
+            templateUrl: '../watch/watch.html',
+            controller: 'WatchCtrl',
+        })
+        .when('/promises', {
+            templateUrl: '../promises/promise.html',
+            controller: 'PromiseCtrl',
+        })
         .otherwise({
             redirectTo: '/',
         })

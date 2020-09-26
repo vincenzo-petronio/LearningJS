@@ -21,50 +21,31 @@
   <!--[if IE]>
       <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-  <div class="container">
+  <div class="container" ng-controller="BaseCtrl">
     <div class="header">
-      <!-- <ul class="nav nav-pills float-right">
-        <li class="nav-item">
-          <a href="#" class="nav-link active">Home</a>
-        </li>
-        <li>
-          <a href="#" class="nav-link">About</a>
-        </li>
-        <li>
-          <a href="#" class="nav-link">Contact</a>
-        </li>
-      </ul> -->
-      <h3 class="text-muted">LearningJS</h3>
+      <h3 class="text-muted">LearningJS - v{{ getAppVersion() }}</h3>
     </div>
 
-    <div class="jumbotron">
-      <h1>Hello world!</h1>
-      <p id="idDateNow"></p>
-
-      <div ng-controller="BaseCtrl">
-        <h2> v{{ getAppVersion() }}</h2>
-
-        <p><b>$watch</b></p><input type="number" placeholder="Enter a number..." ng-model="magicNumber">
-        <p>{{ magicNumberResult }}</p>
+    <div class="row">
+      <div class="columnL" style="background-color:#aaa;">
+        <ul>
+          <li><a ng-href="#!">Home</a></li>
+          <li><a ng-href="#!users">users</a></li>
+          <li><a ng-href="#!comments">comments</a></li>
+          <li><a ng-href="#!scope">scope & this</a></li>
+          <li><a ng-href="#!watch">watch</a></li>
+          <li><a href="views/private_method.html" target="blank">private method with prototype</a></li>
+          <li><a href="views/async.html" target="blank">Async Task</a></li>
+          <li><a ng-href="#!promises">promises</a></li>
+        </ul>
+      </div>
+      <div class="columnR">
+        <div ng-view></div>
       </div>
     </div>
 
-    <div>
-      <ul>
-        <li><a ng-href="#!">Home</a></li>
-        <li><a ng-href="#!users">users</a></li>
-        <li><a ng-href="#!comments">comments</a></li>
-        <li><a ng-href="#!scope">scope & this</a></li>
-        <li><a href="views/private_method.html" target="blank">private method with prototype</a></li>
-        <li><a href="views/async.html" target="blank">Async Task</a></li>
-      </ul>
-    </div>
-    
-    <div ng-view></div>
-
-
-
     <div class="footer">
+      <p id="idDateNow"></p>
     </div>
   </div>
   <!-- build:js scripts/vendor.js -->
@@ -82,6 +63,8 @@
   <script src="users/users.service.js"></script>
   <script src="comments/comment.controller.js"></script>
   <script src="scope/scope.controller.js"></script>
+  <script src="watch/watch.controller.js"></script>
+  <script src="promises/promise.controller.js"></script>
 
   <script type="application/javascript">
     console.log('Page loading complete!');

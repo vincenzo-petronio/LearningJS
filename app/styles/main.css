@@ -39,10 +39,29 @@ body {
   border-top: .05rem solid #e5e5e5;
 }
 
+/* NavBar */
+.columnL {
+  float: left;
+  width: 20%;
+  padding: 4px;
+  /* height: 300px; Should be removed. Only for demonstration */
+}
+.columnR {
+  float: left;
+  width: 80%;
+  padding: 10px;
+}
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+
 /* Customize container */
 @media (min-width: 48em) {
   .container {
-    max-width: 46rem;
+    max-width: 80rem;
   }
 }
 .container-narrow > hr {
