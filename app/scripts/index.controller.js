@@ -7,7 +7,7 @@ angular
     .controller('BaseCtrl', BaseCtrl);
 
 function BaseCtrl($scope) {
-    var app_version = '0.0.1';
+    var app_version = '0.1.0';
 
     /** Esempio di Binding */
     $scope.getAppVersion = function () {

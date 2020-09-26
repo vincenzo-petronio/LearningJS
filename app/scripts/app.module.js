@@ -12,7 +12,7 @@ routeConfig.$inject = ['$routeProvider'];
 function routeConfig($routeProvider) {
     $routeProvider
         .when('/comments', {
-            templateUrl: '../comments/comment.html',
+            templateUrl: '../src/comments/comment.html',
             controller: 'CommentCtrl',
         })
         // .when('/comments/:id', {
@@ -20,19 +20,19 @@ function routeConfig($routeProvider) {
         //     controller: 'CommentCtrl'
         // })
         .when('/users', {
-            templateUrl: '../users/users.html',
+            templateUrl: '../src/users/users.html',
             controller: 'UsersCtrl as vm',
         })
         .when('/scope', {
-            templateUrl: '../scope/scope.html',
+            templateUrl: '../src/scope/scope.html',
             controller: 'ScopeCtrl',
         })
         .when('/watch', {
-            templateUrl: '../watch/watch.html',
+            templateUrl: '../src/watch/watch.html',
             controller: 'WatchCtrl',
         })
         .when('/promises', {
-            templateUrl: '../promises/promise.html',
+            templateUrl: '../src/promises/promise.html',
             controller: 'PromiseCtrl',
         })
         .otherwise({

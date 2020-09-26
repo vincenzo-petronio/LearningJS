@@ -128,7 +128,8 @@ function startAppServer() {
   watch([
     'app/*.html',
     'app/images/**/*',
-    '.tmp/fonts/**/*'
+    '.tmp/fonts/**/*',
+    'app/src/**/*'
   ]).on('change', server.reload);
 
   watch('app/styles/**/*.css', styles);
