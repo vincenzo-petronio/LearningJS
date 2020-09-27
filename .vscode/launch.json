@@ -7,9 +7,9 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Gulp",
+            "name": "Gulp - Launch",
             "program": "${workspaceRoot}/node_modules/gulp/bin/gulp.js",
-            "stopOnEntry": false,
+            "stopOnEntry": true,
             "args": [
                 "serve"
             ],
@@ -18,11 +18,11 @@
                 "/source/*": "${workspaceFolder}/*"
             },
             "cwd": "${workspaceRoot}/",
-            // "port": 9001,
+            // "port": 9222,
             "runtimeArgs": [
                 "--nolazy"
             ],
-            "console": "integratedTerminal",
+            "console": "integratedTerminal", //"integratedConsole",
             "internalConsoleOptions": "neverOpen",
             "trace": "verbose"
         }

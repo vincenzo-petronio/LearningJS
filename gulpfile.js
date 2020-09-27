@@ -116,7 +116,7 @@ const build = series(
 function startAppServer() {
   server.init({
     notify: false,
-    port,
+    port: 10000,
     server: {
       baseDir: ['.tmp', 'app'],
       routes: {
