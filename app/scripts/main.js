@@ -36,5 +36,3 @@ var DataNow = function () {
 //         };
 //     }
 // }
-
-/* eslint-enable */
